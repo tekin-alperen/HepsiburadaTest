@@ -23,8 +23,11 @@ public class PageService {
     private static final By lblCartPopUp = By.xpath("/html/body/div[5]/div/div/div/div/div/div/div/div/div[1]/div[1]/div/span");
     private static final By lblProductName = By.cssSelector("div > h6");
     private static final By lblCartPopUpFrame = By.xpath("/html/body/div[5]/div/div/div/div/div/div");
-    private static final By btnbasket = By.xpath("/html/body/div[5]/div/div/div/div/div/div/div/div/div[1]/div[2]/button[1]");
+    private static final By btnBasket = By.xpath("/html/body/div[5]/div/div/div/div/div/div/div/div/div[1]/div[2]/button[1]");
+    private static final By lstBasket = By.id("onboarding_item_list");
 
+    String selectOneProduct="";
+    String selectSecondProduct="";
 
     public PageService() {
         elements = new Elements();
@@ -92,15 +95,18 @@ public class PageService {
         Assert.assertTrue("hata! ürün sepete eklenmedi", elements.findElement(lblCartPopUp).getText().contains("sepetinizde"));
     }
 
-    public void getName() {
+    public void getOneProductName() {
 
-      String selectOneProduct= elements.findElement(lblProductName).getText();
+      selectOneProduct= elements.findElement(lblProductName).getText();
+    }
+    public void getSecondProductName() {
 
+      selectSecondProduct= elements.findElement(lblProductName).getText();
     }
 
     public void goBasket() {
 
-        elements.clickElement(btnbasket);
+        elements.clickElement(btnBasket);
     }
 
     public void goHome() {
@@ -117,7 +123,17 @@ public class PageService {
         elements.clickElement(chkSecondSeller);
         elements.clickElement(btnProduct);
     }
+
+    public Boolean assertToProduct(){
+        if(elements.findElement(lstBasket).getText().contains(selectOneProduct)&&elements.findElement(lstBasket).getText().contains(selectOneProduct)) {
+        return true;
+        }
+        else return false;
+    }
+
     public void closeDriver(){
         elements.closeDriver();
     }
 }
+
+

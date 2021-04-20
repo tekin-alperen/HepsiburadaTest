@@ -2,7 +2,7 @@ import org.junit.Test;
 
 public class BaseTest {
     @Test
-    public void testOne() {
+    public void userLoginCase() {
 
         System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
 
@@ -19,7 +19,7 @@ public class BaseTest {
         pageService.addToCart();
         pageService.PopupWait();
         pageService.assertCart();
-        pageService.getName();
+        pageService.getOneProductName();
         pageService.goBasket();
         pageService.goHome();
         pageService.returnSearch();
@@ -27,8 +27,39 @@ public class BaseTest {
         pageService.addToCart();
         pageService.PopupWait();
         pageService.assertCart();
+        pageService.getSecondProductName();
         pageService.goBasket();
+        pageService.assertToProduct();
         pageService.closeDriver();
 
     }
+
+    @Test
+    public void nonUserLoginCase() {
+
+        System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
+
+        PageService pageService = new PageService();
+        pageService.setup();
+        pageService.baseUrlControl();
+        pageService.setSearch("Guaj boya");
+        pageService.firstSellerClick();
+        pageService.addToCart();
+        pageService.PopupWait();
+        pageService.assertCart();
+        pageService.getOneProductName();
+        pageService.goBasket();
+        pageService.goHome();
+        pageService.returnSearch();
+        pageService.secondSellerClick();
+        pageService.addToCart();
+        pageService.PopupWait();
+        pageService.assertCart();
+        pageService.getSecondProductName();
+        pageService.goBasket();
+        pageService.assertToProduct();
+        pageService.closeDriver();
+
+    }
+
 }
